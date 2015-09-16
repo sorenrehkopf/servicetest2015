@@ -1,40 +1,35 @@
-﻿using System;
+﻿using MCS.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-// maybe you should use this
 namespace InterviewTest2015.Controllers
 {
     public class RecordController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+
+        public IHttpActionResult Get(int id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                RecordModel r = new RecordModel().FindById(id);
+                if (r == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(r);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
