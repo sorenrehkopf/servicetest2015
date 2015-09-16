@@ -11,8 +11,6 @@ namespace MCS.Models
 {
     public class ContactModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public Int32 OldId { get; set; }
         public string Address { get; set; }
