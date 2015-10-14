@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace InterviewTest2015.Controllers
 {
     public class RecordController : ApiController
     {
+        public async Task<IHttpActionResult> Get()
+        {
+            return Ok(await RecordModel.WaitingForParts());
+        }
 
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             try
             {
-                RecordModel r = new RecordModel().FindById(id);
+                RecordModel r = await RecordModel.FindById(id);
                 if (r == null)
                 {
                     return NotFound();
@@ -28,6 +33,18 @@ namespace InterviewTest2015.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        public async Task<IHttpActionResult> Put(RecordModel record)
+        {
+            if (await RecordModel.Update(record))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 

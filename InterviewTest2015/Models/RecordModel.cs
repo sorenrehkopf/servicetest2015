@@ -1,19 +1,19 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization;
-using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace MCS.Models
 {
     public class RecordModel
     {
-        const string COLLECTION_NAME = "";
+        const string COLLECTION_NAME = "records_miker";
         [BsonId]
         public int Id { get; set; }
         public int ParentId { get; set; }
@@ -42,14 +42,53 @@ namespace MCS.Models
 
         public RecordModel() { }
 
-        public RecordModel FindById(int id)
+        public static async Task<RecordModel> FindById(int id)
         {
-            MongoServer server = new MongoClient(ConfigurationManager.AppSettings["Mongo"]).GetServer();
-            MongoDatabase db = server.GetDatabase("microk12db");
-            RecordModel retval = db.GetCollection<RecordModel>(COLLECTION_NAME).AsQueryable<RecordModel>().Where(m => m.Id == id).FirstOrDefault();
+            RecordModel retval;
+            try
+            {
+                var db = new MongoClient(ConfigurationManager.AppSettings["Mongo"]).GetDatabase("interview").GetCollection<RecordModel>("records_miker");
+                retval = await db.Find(m => m.Id == id).SingleOrDefaultAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Something went wrong: {0}", ex.Message));
+            }
             return retval;
+        }
+
+        public static async Task<IEnumerable<RecordModel>> WaitingForParts()
+        {
+            List<RecordModel> retval = new List<RecordModel>();
+            try
+            {
+                var db = new MongoClient(ConfigurationManager.AppSettings["Mongo"]).GetDatabase("interview").GetCollection<RecordModel>("records_miker");
+                retval = await db.Find(m => m.Id != 0).ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Something went wrong: {0}", ex.Message));
+            }
+
+            return retval;
+        }
+
+        public static async Task<Boolean> Update(RecordModel model)
+        {
+            try
+            {
+                var db = new MongoClient(ConfigurationManager.AppSettings["Mongo"]).GetDatabase("interview").GetCollection<RecordModel>("records_miker");
+                await db.ReplaceOneAsync(m => m.Id == model.Id, model);
+
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
 
     }
 }
- 
