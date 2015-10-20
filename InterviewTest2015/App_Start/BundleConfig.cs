@@ -14,6 +14,7 @@ namespace InterviewTest2015
                 "~/app/app.js",
                 "~/app/services/part.js",
                 "~/app/controllers/dashboard.js",
+                "~/app/controllers/modal.js",
                 "~/app/filters/filters.js"
                 
             ));
@@ -22,7 +23,8 @@ namespace InterviewTest2015
                  "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                 "~/Scripts/bootstrap.js"));
+                 "~/Scripts/ui-bootstrap-tpls-0.12.0.js"
+                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",

@@ -1,4 +1,4 @@
-﻿var app = angular.module('MCS_ServiceApp', ['ngRoute', 'ngResource']).config(function () {});
+﻿var app = angular.module('MCS_ServiceApp', ['ngRoute', 'ngResource','ui.bootstrap']).config(function () {});
 
 app.controller("MasterController", function ($scope, $rootScope, $location) { $location.path('/dashboard'); });
 
