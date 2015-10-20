@@ -1,5 +1,6 @@
-app.controller('ModalCtrl', function ($scope, $modalInstance, id, Part) {
+app.controller('ModalCtrl', function ($scope, $modalInstance, id, partId, Part) {
 	$scope.id = id;
+	$scope.partId = partId;
 	$scope.closeModal = function () {
 		$modalInstance.dismiss()
 	};
@@ -8,8 +9,17 @@ app.controller('ModalCtrl', function ($scope, $modalInstance, id, Part) {
 	};
 	$scope.update = function () {
 		var name = $scope.name.username;
-		Part.get({ id: $scope.id }, function (part) {
-			console.log(part)
+		var record = Part.get({ id: $scope.id }, function(record){
+			for(i=0;i<record.Parts.length;i++){
+				if (record.Parts[i].PartNo === $scope.partId) {
+					record.Parts[i].Received = true;
+					record.Parts[i].ReceivingInfo.ReceivedBy = $scope.name.username;
+					record.Parts[i].ReceivingInfo.ReceivedOn = new Date();
+				}
+			}
+			record.$update(function () {
+				$scope.closeModal();
+			})
 		})
 	}
 });

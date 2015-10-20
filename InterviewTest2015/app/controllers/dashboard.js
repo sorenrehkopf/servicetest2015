@@ -18,7 +18,7 @@
 		})
 		console.log($scope.parts)
 	});
-	$scope.openModal = function(recordId,index) {
+	$scope.openModal = function(recordId,partId,index) {
 				
 		var modalInstance = $modal.open({
 			templateUrl: 'app/views/modals/modal.html',
@@ -26,6 +26,9 @@
 			resolve: {
 				id: function () {
 					return recordId;
+				},
+				partId: function () {
+					return partId
 				}
 			}
 		});

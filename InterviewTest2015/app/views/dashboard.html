@@ -14,7 +14,7 @@
             <td>{{part.qty}}</td>
             <td>{{part.partNum}}</td>
             <td>{{part.days}}</td>
-            <td><button class="btn btn-primary" ng-click="openModal(part.recordNum,$index)">Received</button></td>
+            <td><button class="btn btn-primary" ng-click="openModal(part.recordNum,part.partNum,$index)">Received</button></td>
         </tr>
     </table>
 </div>
