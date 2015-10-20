@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\directives\" />
-    <Folder Include="app\services\" />
     <Folder Include="app\views\modals\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
@@ -161,6 +160,8 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\controllers\dashboard.js" />
+    <Content Include="app\filters\filters.js" />
+    <Content Include="app\services\part.js" />
     <Content Include="app\views\dashboard.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="favicon.ico" />

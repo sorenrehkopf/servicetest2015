@@ -11,7 +11,11 @@ namespace InterviewTest2015
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                "~/app/app.js"
+                "~/app/app.js",
+                "~/app/services/part.js",
+                "~/app/controllers/dashboard.js",
+                "~/app/filters/filters.js"
+                
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

@@ -5,7 +5,8 @@ app.controller("MasterController", function ($scope, $rootScope, $location) { $l
 app.config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider.when("/dashboard/", {
-        templateUrl: "app/views/dashboard.html"
+    	templateUrl: "app/views/dashboard.html",
+		controller:"DashCtrl"
     }).otherwise({
         redirectTo: ''
     });

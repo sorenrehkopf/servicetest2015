@@ -1,3 +1,19 @@
 ﻿<div class="text-center">
-    <h2>Your work goes here</h2>
+    <h2>HOLY GOD IN HEAVEN WHAT HAVE I DONE???</h2>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>RecordNo.</th>
+            <th>OrderNo.</th>
+            <th>Qty</th>
+            <th>PartNo.</th>
+            <th>Days.</th>
+        </tr>
+        <tr ng-repeat="part in parts track by $index" class="{{part.days > 4? 'danger' : null}}">
+            <th>{{part.recordNum}}</th>
+            <th>{{part.orderNum}}</th>
+            <th>{{part.qty}}</th>
+            <th>{{part.partNum}}</th>
+            <th>{{part.days}}</th>
+        </tr>
+    </table>
 </div>
